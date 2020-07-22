@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using EF.InDesignTest.App.Data;
 
 namespace EF.InDesignTest.App
 {
@@ -26,6 +27,9 @@ namespace EF.InDesignTest.App
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<EFInDesignTestAppContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("EFInDesignTestAppContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
