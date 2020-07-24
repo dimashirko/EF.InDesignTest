@@ -9,7 +9,7 @@ export class ShowClientsComponent {
   public clients: Client[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Client[]>(baseUrl + 'api/Clients/Clients').subscribe(result => {
+    http.get<Client[]>(baseUrl + 'clients').subscribe(result => {
       this.clients = result;
     }, error => console.error(error));
   }

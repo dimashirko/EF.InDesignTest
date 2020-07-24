@@ -8,7 +8,7 @@ using EF.InDesignTest.App.Models;
 
 namespace EF.InDesignTest.App.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ClientsController : ControllerBase
     {
@@ -19,16 +19,15 @@ namespace EF.InDesignTest.App.Controllers
             _context = context;
         }
 
-        // GET: api/Clients
+        // GET: Clients
         [HttpGet]
-        [Route("api/[controller]/Clients")]
-        public async Task<ActionResult<IEnumerable<Client>>> GetClient()
+        public async Task<ActionResult<IEnumerable<Client>>> GetClients()
         {
             return await _context.Clients.ToListAsync();
         }
 
-        // GET: api/Clients/5
-        [HttpGet("api/[controller]/{id}")]
+        // GET: Clients/5
+        [HttpGet("{id}")]
         public async Task<ActionResult<Client>> GetClient(int id)
         {
             var client = await _context.Clients.FindAsync(id);
@@ -41,10 +40,10 @@ namespace EF.InDesignTest.App.Controllers
             return client;
         }
 
-        // PUT: api/Clients/5
+        // PUT: Clients/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("api/[controller]/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutClient(int id, Client client)
         {
             if (id != client.Id)
@@ -73,7 +72,7 @@ namespace EF.InDesignTest.App.Controllers
             return NoContent();
         }
 
-        // POST: api/Clients
+        // POST: Clients
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -85,8 +84,8 @@ namespace EF.InDesignTest.App.Controllers
             return CreatedAtAction("GetClient", new { id = client.Id }, client);
         }
 
-        // DELETE: api/Clients/5
-        [HttpDelete("api/[controller]/{id}")]
+        // DELETE: Clients/5
+        [HttpDelete("{id}")]
         public async Task<ActionResult<Client>> DeleteClient(int id)
         {
             var client = await _context.Clients.FindAsync(id);

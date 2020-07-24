@@ -6,10 +6,13 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ShowClientsComponent } from './show-clients/show-clients.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavMenuComponent,
     ShowClientsComponent
   ],
   imports: [
@@ -17,7 +20,7 @@ import { ShowClientsComponent } from './show-clients/show-clients.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: 'show-clients', component: ShowClientsComponent },
+      { path: '', component: ShowClientsComponent, pathMatch: 'full'},
     ])
   ],
   providers: [],
