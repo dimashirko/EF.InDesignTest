@@ -1,4 +1,5 @@
-﻿using System; 
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EF.InDesignTest.App.Models
 {
@@ -10,6 +11,7 @@ namespace EF.InDesignTest.App.Models
         public string Operation { get; set; }
         public int Amount { get; set; }
         public DateTime Date { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
     }
 }
