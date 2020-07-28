@@ -1,22 +1,41 @@
 <h1 id="tableLabel">Clients</h1>
 
 <p *ngIf="!clients"><em>Loading...</em></p>
+<button (click)="addClient($event)" class="addButton" *ngIf="clients">Add Client</button>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="clients">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Phone Number</th>
-      <th>Car Model</th>
-      <th>Car Number</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let client of clients">
-      <td>{{ client.name }}</td>
-      <td>{{ client.phoneNumber }}</td>
-      <td>{{ client.carModel }}</td>
-      <td>{{ client.carNumber }}</td>
-    </tr>
-  </tbody>
-</table>
+<!--<div class="mainDiv">
+  <div class="leftElem">-->
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="clients">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Car Model</th>
+          <th>Car Number</th>
+          <th>Edit</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients; index as i;">
+          <td><div *ngIf="!enableEdit">{{ client.name }}</div> <input *ngIf="enableEdit && enableEditIndex == i" [value]="client.name" (input)="client.name = $event.target.value" /> </td>
+          <td><div *ngIf="!enableEdit">{{ client.phoneNumber }}</div> <input *ngIf="enableEdit && enableEditIndex == i" [value]="client.phoneNumber" (input)="client.phoneNumber = $event.target.value" /> </td>
+          <td><div *ngIf="!enableEdit">{{ client.carModel }}</div> <input *ngIf="enableEdit && enableEditIndex == i" [value]="client.carModel" (input)="client.carModel = $event.target.value" /> </td>
+          <td><div *ngIf="!enableEdit">{{ client.carNumber }}</div> <input *ngIf="enableEdit && enableEditIndex == i" [value]="client.carNumber" (input)="client.carNumber = $event.target.value" /> </td>
+          <td>
+            <button *ngIf="enableEdit && enableEditIndex == i" id="saveBtn" class="btn page-primary-action-btn" (click)="saveChanges($event, client)" type="submit">Save</button>
+            <button *ngIf="enableEdit && enableEditIndex == i" (click)="cancelChanges($event, client)" class="btn page-secondary-action-btn">Cancel</button>
+            <a href="#" class="table-row-action edit-action" *ngIf="!enableEdit" (click)="enableEditMethod($event, i, client)">Edit</a>
+          </td>
+          <td>
+            <a href="#" class="table-row-action edit-action" (click)="removeClient($event, client)">Remove</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+<!--  </div>
+  <div class="rightElem">
+    <input />
+  </div>
+</div>
+-->

@@ -54,7 +54,7 @@ namespace EF.InDesignTest.App
             }
 
             app.UseRouting();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
