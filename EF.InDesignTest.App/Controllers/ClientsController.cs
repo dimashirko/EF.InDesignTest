@@ -32,7 +32,7 @@ namespace EF.InDesignTest.App.Controllers
         [Route("")]
         public async Task<ActionResult<IEnumerable<Client>>> GetClients()
         {
-            return await _context.Clients.ToListAsync();
+            return await _context.Clients.Include(x => x.Services).ToListAsync();
         }
 
         // GET: Clients/5

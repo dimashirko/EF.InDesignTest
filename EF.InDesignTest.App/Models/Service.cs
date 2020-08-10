@@ -7,7 +7,6 @@ namespace EF.InDesignTest.App.Models
     {
         public int Id { get; set; }
         public int ClientId { get; set; }
-        public Client Client { get; set; }
         public string Operation { get; set; }
         public int Amount { get; set; }
         public DateTime Date { get; set; }

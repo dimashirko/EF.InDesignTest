@@ -1,24 +1,6 @@
-.addButton {
-  padding: 0 6px 0 6px;
-  margin: 6px 8px 6px 8px;
-  min-width: 88px;
-  border-radius: 3px;
-  font-size: 14px;
-  text-align: center;
-  text-transform: capitalize;
-  text-decoration: none;
-  border:outset;
-  outline: none;
+table {
+  width: 100%;
 }
-.leftElem {
-  float: left;
-  width: 40%;
-  padding: 4px;
-}
-.rightElem {
-  float: left;
-  width: 60%;
-}
-.mainDiv{
-    width: 100%
+.buttonMain {
+  margin: 16px 8px;
 }
