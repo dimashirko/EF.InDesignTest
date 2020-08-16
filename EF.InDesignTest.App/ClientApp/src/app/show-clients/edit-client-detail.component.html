@@ -18,29 +18,33 @@
     <input matInput [(ngModel)]="data.selectedClient.carNumber" />
   </mat-form-field>
 
-<mat-table [dataSource]="data.selectedClient.services" class="mat-elevation-z8">
-  <ng-container matColumnDef="operation">
-    <mat-header-cell *matHeaderCellDef> Operation </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.operation}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="amount">
-    <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="date">
-    <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.date.toLocaleString()}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="price">
-    <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
-  </ng-container>
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+  <mat-table [dataSource]="services" class="mat-elevation-z8">
+    <ng-container matColumnDef="operation">
+      <mat-header-cell *matHeaderCellDef> Operation </mat-header-cell>
+      <mat-cell *matCellDef="let service"> {{service.operation}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-cell *matCellDef="let service"> {{service.amount}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+      <mat-cell *matCellDef="let service"> {{_dateFormatPipe.transform(service.date)}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+      <mat-cell *matCellDef="let service"> {{service.price}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="remove" class="btn-primary">
+      <mat-header-cell *matHeaderCellDef> Remove </mat-header-cell>
+      <mat-cell *matCellDef="let service"> <button mat-raised-button (click)="removeService($event, service)">Remove</button> </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
 </div>
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="addservice()">Add Service</button>
+  <button mat-button (click)="addService()">Add Service</button>
 </div>

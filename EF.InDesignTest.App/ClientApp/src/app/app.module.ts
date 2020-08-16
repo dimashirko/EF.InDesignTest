@@ -4,11 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { ShowClientsComponent, ClientDetailComponentDialog, EditClientDetailComponentDialog } from './show-clients/show-clients.component';
+import { ShowClientsComponent } from './show-clients/show-clients.component';
+import { ClientDetailComponentDialog } from "./show-clients/ClientDetailComponentDialog";
+import { EditClientDetailComponentDialog } from "./show-clients/EditClientDetailComponentDialog";
+import { ServiceDetailComponentDialog } from "./show-clients/ServiceDetailComponentDialog";
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { MaterialModule } from './material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { DateFormatPipe } from './show-clients/DateFormatPipe';
 
 @NgModule({
   declarations: [
@@ -16,9 +20,10 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     NavMenuComponent,
     ShowClientsComponent,
     ClientDetailComponentDialog,
-    EditClientDetailComponentDialog
+    EditClientDetailComponentDialog,
+    ServiceDetailComponentDialog
   ],
-  entryComponents: [ShowClientsComponent, ClientDetailComponentDialog, EditClientDetailComponentDialog],
+  entryComponents: [ShowClientsComponent, ClientDetailComponentDialog, EditClientDetailComponentDialog, ServiceDetailComponentDialog],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -30,7 +35,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     ])
   ],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }, DateFormatPipe
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Add new service record for client "{{data.clientName}}"</h1>
+<div mat-dialog-content>
+  <p>Set service info</p>
+  <mat-form-field>
+    <mat-label>Operation</mat-label>
+    <input matInput [(ngModel)]="data.newService.operation" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Amount</mat-label>
+    <input matInput [(ngModel)]="data.newService.amount" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Date</mat-label>
+    <input type="datetime" matInput [(ngModel)]="data.newService.date" /> 
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Price</mat-label>
+    <input matInput [(ngModel)]="data.newService.price" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

@@ -23,6 +23,7 @@
     "@angular/router": "10.0.8",
     "@angular/material": "10.1.2",
     "@angular/cdk": "10.1.2",
+    "@angular-material-components/datetime-picker": "4.0.1",
     "aspnet-prerendering": "3.0.1",
     "bootstrap": "4.5.1",
     "core-js": "3.6.5",

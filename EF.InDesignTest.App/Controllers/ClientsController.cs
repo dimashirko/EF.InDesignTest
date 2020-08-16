@@ -10,33 +10,64 @@ namespace EF.InDesignTest.App.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ClientsController : ControllerBase
+    public class ServicesController : ControllerBase
     {
         private readonly EFInDesignTestAppContext _context;
 
-        public ClientsController(EFInDesignTestAppContext context)
+        public ServicesController(EFInDesignTestAppContext context)
         {
             _context = context;
         }
 
-        // GET: Clients
-        [HttpGet("{id}")]
-        [Route("/clientservices/{id}")]
-        public async Task<ActionResult<IEnumerable<Service>>> GetClientServices(int id)
+        [HttpPost]
+        [Route("/postservice")]
+        public async Task<ActionResult<Service>> PostService(Service service)
         {
-            return await _context.Services.Where(service => service.ClientId == id).ToListAsync();
+            _context.Services.Add(service);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetService", new { id = service.Id }, service);
         }
 
-        // GET: Clients
+        [HttpGet("{id}")]
+        [Route("/getservice")]
+        public async Task<ActionResult<Service>> GetService(int id)
+        {
+            var service = await _context.Services.FindAsync(id);
+
+            if (service == null)
+            {
+                return NotFound();
+            }
+
+            return service;
+        }
+
+        [HttpDelete("{id}")]
+        [Route("/deleteservice/{id}")]
+        public async Task<ActionResult<Service>> DeleteService(int id)
+        {
+            var service = await _context.Services.FindAsync(id);
+            if (service == null)
+            {
+                return NotFound();
+            }
+
+            _context.Services.Remove(service);
+            await _context.SaveChangesAsync();
+
+            return service;
+        }
+
         [HttpGet]
-        [Route("")]
+        [Route("/getclients")]
         public async Task<ActionResult<IEnumerable<Client>>> GetClients()
         {
             return await _context.Clients.Include(x => x.Services).ToListAsync();
         }
 
-        // GET: Clients/5
         [HttpGet("{id}")]
+        [Route("/getclient")]
         public async Task<ActionResult<Client>> GetClient(int id)
         {
             var client = await _context.Clients.FindAsync(id);
@@ -49,9 +80,6 @@ namespace EF.InDesignTest.App.Controllers
             return client;
         }
 
-        // PUT: Clients/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         [Route("/putclient/{id}")]
         public async Task<IActionResult> PutClient(int id, Client client)
@@ -82,9 +110,6 @@ namespace EF.InDesignTest.App.Controllers
             return NoContent();
         }
 
-        // POST: Clients
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         [Route("/postclient")]
         public async Task<ActionResult<Client>> PostClient(Client client)
@@ -95,7 +120,6 @@ namespace EF.InDesignTest.App.Controllers
             return CreatedAtAction("GetClient", new { id = client.Id }, client);
         }
 
-        // DELETE: Clients/5
         [HttpDelete("{id}")]
         [Route("/deleteclient/{id}")]
         public async Task<ActionResult<Client>> DeleteClient(int id)
